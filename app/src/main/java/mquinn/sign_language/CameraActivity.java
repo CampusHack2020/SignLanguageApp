@@ -241,7 +241,7 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
                 if (soFar.equals(words.get(wordsIndex))) {
 
                     // TODO - create dialogue
-                    
+
                     word.setText("Sign: " + words.get(++wordsIndex));
                     letters.clear();
 
