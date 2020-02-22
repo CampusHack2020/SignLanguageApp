@@ -9,15 +9,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="227dp"
-        android:layout_height="228dp"
+        android:layout_width="278dp"
+        android:layout_height="278dp"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.167" />
 
     <LinearLayout android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -31,8 +31,8 @@
         app:layout_constraintVertical_bias="0.5"/>
 
     <LinearLayout
-        android:layout_width="346dp"
-        android:layout_height="630dp"
+        android:layout_width="442dp"
+        android:layout_height="866dp"
         android:background="@drawable/customborder2"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
