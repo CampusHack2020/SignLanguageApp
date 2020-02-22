@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import androidx.core.content.ContextCompat;
 
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -37,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import mquinn.sign_language.imaging.IFrame;
@@ -68,16 +71,18 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
 
     private IRenderer mainRenderer;
 
-    private TextView signedString, word;
+    private TextView signedString, word, stringSoFar;
 
-    private int wordsIndex = 0;
+    private int wordPosIndex = 0;
 
-    private List<String> words = Arrays.asList("and", "ape", "hello", "hi", "home", "people");
+    private List<String> words = Arrays.asList("you", "ape", "hello", "hi", "home", "people");
     private List<Character> letters = new ArrayList<>();
 
-    private String currentLetter, previousLetter, modLetter;
+    private String currentLetter, previousLetter, modLetter, currentWord;
 
     private DetectionMethod detectionMethod;
+
+    private Random rand = new Random();
 
     private BaseLoaderCallback  mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -100,6 +105,8 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        newRandWord("");
+
         // Set view parameters
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -121,9 +128,26 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
         }
 
         word = findViewById(R.id.stringToSign);
-        word.setText("Sign: " + words.get(wordsIndex));
+        word.setText("Sign: " + currentWord);
         signedString = findViewById(R.id.signedString);
+        stringSoFar = findViewById(R.id.stringSoFar);
 
+
+    }
+
+    public void newRandWord(String current) {
+
+        String newWord = current;
+
+        while (newWord.equals(current)) {
+            newWord = words.get(rand.nextInt(words.size()));
+        }
+
+        currentWord = newWord;
+    }
+
+    public void setCameraDroneChoice (View view){
+        startActivity(new Intent(CameraActivity.this, CameraDroneChoiceActivity.class));
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
@@ -238,24 +262,34 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
 
                 String soFar = letters.stream().map(String::valueOf).collect(Collectors.joining());
 
-                if (soFar.equals(words.get(wordsIndex))) {
+                if (soFar.equals(currentWord)) {
 
                     // TODO - create dialogue
 
-                    word.setText("Sign: " + words.get(++wordsIndex));
+                    newRandWord(currentWord);
+                    word.setText("Sign: " + currentWord);
                     letters.clear();
+                    signedString.setText("Great job!");
+                    stringSoFar.setText("");
+
+                    wordPosIndex = 0;
 
                     return;
 
                 }
 
-                if (signedString.getText().toString().length() > 0)
-                    signedString.setText(signedString.getText().toString().substring(0, signedString.getText().toString().length() - 1));
+                char currentChar = currentLetterForMod.trim().toLowerCase().charAt(0);
 
-                signedString.append(currentLetterForMod);
+                if (!currentLetterForMod.contains("?") && (currentWord.charAt(wordPosIndex) == currentChar)) {
+                    letters.add(currentChar);
+                    signedString.setText(currentLetterForMod);
 
-                if (!currentLetterForMod.contains("?"))
-                    letters.add(currentLetterForMod.trim().charAt(0));
+                    stringSoFar.setText(letters.stream().map(String::valueOf).collect(Collectors.joining()));
+                    wordPosIndex++;
+
+                } else if (!currentLetterForMod.contains("?")) {
+                    signedString.setText("Oops! That was a " + currentLetterForMod);
+                }
 
             }
         });
