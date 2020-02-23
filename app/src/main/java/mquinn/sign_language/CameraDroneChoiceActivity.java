@@ -20,11 +20,13 @@ public class CameraDroneChoiceActivity extends Activity {
     }
 
     public void openCamera (View view){
+        CameraActivity.droneMode = false;
         startActivity(new Intent(CameraDroneChoiceActivity.this, CameraActivity.class));
     }
 
     public void openDrone (View view){
-        startActivity(new Intent(CameraDroneChoiceActivity.this, DroneActivity.class));
+        CameraActivity.droneMode = true;
+        startActivity(new Intent(CameraDroneChoiceActivity.this, CameraActivity.class));
     }
 
     public void openDifficulty (View view){

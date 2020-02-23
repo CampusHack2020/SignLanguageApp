@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AlphabetChartActivity"
-    android:background="#dee0df" >
+    android:background="#FFFFFF"
+    tools:context=".AlphabetChartActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -19,27 +18,27 @@
         android:id="@+id/floatingActionButtonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="openDictionaryAlphabetChoice"
         android:layout_margin="10dp"
-        app:backgroundTint="@android:color/white"
-        android:src="?attr/actionModeCloseDrawable"
-        android:rotation="0"
+        android:clickable="true"
         android:elevation="0dp"
+        android:onClick="openDictionaryAlphabetChoice"
+        android:rotation="0"
+        android:src="?attr/actionModeCloseDrawable"
+        app:backgroundTint="@android:color/white"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008"/>
+        app:layout_constraintVertical_bias="0.008" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="350dp"
         android:layout_height="549dp"
-        android:src="@drawable/alphabet_chart"
         android:background="#ffffff"
+        android:src="@drawable/alphabet_chart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -47,16 +46,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
 
-    <LinearLayout android:orientation="vertical"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/customborder1"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.5" />
 
     <LinearLayout
         android:layout_width="442dp"
@@ -68,7 +68,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

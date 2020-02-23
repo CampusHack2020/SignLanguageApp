@@ -1,28 +1,22 @@
 package mquinn.sign_language;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.view.SurfaceView;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import android.util.Log;
-import android.view.SurfaceView;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -34,11 +28,11 @@ import org.opencv.core.Mat;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -66,16 +60,16 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
     private IFramePreProcessor preProcessor;
     private IFramePostProcessor postProcessor;
     private IFrame preProcessedFrame, processedFrame, postProcessedFrame, classifiedFrame;
-
+    protected static boolean droneMode = false;
     private IFrameProcessor mainFrameProcessor, frameClassifier;
-
+    protected static DroneController dc;
     private IRenderer mainRenderer;
 
     private TextView signedString, word, stringSoFar;
 
     private int wordPosIndex = 0;
 
-    private List<String> words = Arrays.asList("you", "you", "you", "you", "you", "you");
+    private List<String> words = Arrays.asList("y", "o", "u", "b", "c", "you");
     private List<Character> letters = new ArrayList<>();
 
     private String currentLetter, previousLetter, modLetter, currentWord;
@@ -115,6 +109,21 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
         // Set content view
         setContentView(R.layout.sign_language_activity_surface_view);
 
+//        Connect to drone
+        if (droneMode) {
+
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            dc = new DroneController();
+
+            System.out.println("DRONE ON");
+
+            dc.connect();
+
+        }
+
         // Camera config
         mOpenCvCameraView = findViewById(R.id.sign_language_activity_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
@@ -132,7 +141,6 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
         signedString = findViewById(R.id.signedString);
         stringSoFar = findViewById(R.id.stringSoFar);
 
-
     }
 
     public void newRandWord(String current) {
@@ -148,6 +156,12 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
 
     public void setCameraDroneChoice (View view){
         startActivity(new Intent(CameraActivity.this, CameraDroneChoiceActivity.class));
+        try {
+            dc.running = false;
+            dc.land();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
@@ -263,8 +277,18 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
                 String soFar = letters.stream().map(String::valueOf).collect(Collectors.joining());
 
                 if (soFar.equals(currentWord)) {
+                    if(droneMode){
+                        try {
 
-//                    Toast.makeText(CameraActivity.this, "Great job!", Toast.LENGTH_SHORT).show();
+                            int f = rand.nextInt(4);
+                            String s = (f == 0) ? "f" : (f == 1) ? "b" : (f == 2) ? "l" : "r";
+
+                            dc.flip(s);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
                     newRandWord(currentWord);
                     word.setText("Sign: " + currentWord);
@@ -274,23 +298,24 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
 
                     wordPosIndex = 0;
 
-                    return;
+                } else {
+
+                    if (currentLetterForMod.trim().length() > 0) {
+                        char currentChar = currentLetterForMod.trim().toLowerCase().charAt(0);
+
+                        if (!currentLetterForMod.contains("?") && (currentWord.charAt(wordPosIndex) == currentChar)) {
+                            letters.add(currentChar);
+                            signedString.setText(currentLetterForMod);
+
+                            stringSoFar.setText(letters.stream().map(String::valueOf).collect(Collectors.joining()));
+                            wordPosIndex++;
+
+                        } else if (!currentLetterForMod.contains("?")) {
+                            signedString.setText("Oops! That was a " + currentLetterForMod);
+                        }
+                    }
 
                 }
-
-                char currentChar = currentLetterForMod.trim().toLowerCase().charAt(0);
-
-                if (!currentLetterForMod.contains("?") && (currentWord.charAt(wordPosIndex) == currentChar)) {
-                    letters.add(currentChar);
-                    signedString.setText(currentLetterForMod);
-
-                    stringSoFar.setText(letters.stream().map(String::valueOf).collect(Collectors.joining()));
-                    wordPosIndex++;
-
-                } else if (!currentLetterForMod.contains("?")) {
-                    signedString.setText("Oops! That was a " + currentLetterForMod);
-                }
-
             }
         });
     }

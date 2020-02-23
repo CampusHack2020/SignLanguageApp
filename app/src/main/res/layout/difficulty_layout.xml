@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DifficultyActivity"
-    android:background="#dee0df">
+    android:background="#EDECEC"
+    tools:context=".DifficultyActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -20,16 +19,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.167" />
 
-    <LinearLayout android:orientation="vertical"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/customborder1"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.5" />
 
     <LinearLayout
         android:layout_width="442dp"
@@ -41,7 +41,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -54,20 +54,20 @@
         android:id="@+id/floatingActionButtonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:onClick="openMain"
         android:layout_margin="10dp"
-        app:backgroundTint="@android:color/white"
-        android:src="?attr/actionModeCloseDrawable"
-        android:rotation="0"
+        android:clickable="true"
         android:elevation="0dp"
+        android:onClick="openMain"
+        android:rotation="0"
+        android:src="?attr/actionModeCloseDrawable"
+        app:backgroundTint="@android:color/white"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008"/>
+        app:layout_constraintVertical_bias="0.008" />
 
 
     <TextView
@@ -75,9 +75,9 @@
         android:layout_width="200dp"
         android:layout_height="46dp"
         android:text="DIFFICULTY"
-        android:textStyle="bold"
         android:textAlignment="center"
         android:textSize="30dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"

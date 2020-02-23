@@ -6,7 +6,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 
 /** @author gnabit@gnamingo.de */
-public class DroneController {
+public class DroneController implements Runnable {
 
     final public static DroneController INSTANCE = new DroneController();
 
@@ -14,9 +14,13 @@ public class DroneController {
     private int port;
     private DatagramSocket s;
     private boolean isImperial;
+    private Thread thread;
+    protected boolean running = true;
 
-    final public void connect() throws Exception {
-        this.connect("192.168.10.1", 8889);
+
+    final public void connect() {
+        thread = new Thread(this);
+        thread.start();
     }
 
     final public void connect(final String strIP, final int port) throws Exception {
@@ -26,7 +30,7 @@ public class DroneController {
         s.setReuseAddress(true);
         s.connect(ip, port);
         sendCommand("command");
-        sendCommand("streamon");
+//        sendCommand("streamon");
         System.out.println(s.getLocalPort());
         System.out.println(s.getLocalSocketAddress());
         System.out.println(s.getLocalAddress());
@@ -67,7 +71,9 @@ public class DroneController {
     // *** Read Commands ***
 
     final public String getBattery() throws IOException {
-        return sendCommand("battery?");
+        String b = sendCommand("battery?");
+        System.out.println("DRONE: Battery - " + b);
+        return b;
     }
 
     final public String getSpeed() throws IOException {
@@ -84,6 +90,7 @@ public class DroneController {
      * whaooo
      */
     final public boolean takeOff() throws IOException {
+        System.out.println("DRONE: Taking off");
         return isOK(sendCommand("takeoff"));
     }
 
@@ -91,6 +98,7 @@ public class DroneController {
      * land
      */
     final public boolean land() throws IOException {
+        System.out.println("DRONE: Landing");
         return isOK(sendCommand("land"));
     }
 
@@ -154,6 +162,7 @@ public class DroneController {
      * Flip x l = (left) r = (right) f = (forward) b = (back) bl = (back/left) rb = (back/right) fl = (front/left) fr = (front/right)
      */
     final public boolean flip(final String o) throws IOException {
+        System.out.println("DRONE: Doing a flip");
         return isOK(sendCommand("flip " + o));
     }
 
@@ -176,6 +185,7 @@ public class DroneController {
         return null != strResult && strResult.equals("OK");
     }
 
+
     final private String sendCommand(final String strCommand) throws IOException {
         if(null == strCommand || 0 == strCommand.length())
             return "empty command";
@@ -195,5 +205,34 @@ public class DroneController {
     final public void close() {
         if(null != s)
             s.close();
+    }
+
+    @Override
+    public void run() {
+    try {
+
+        long start = System.currentTimeMillis();
+
+        this.connect("192.168.10.1", 8889);
+        this.takeOff();
+        up(90);
+
+        while (running) {
+
+            if (System.currentTimeMillis() - start > 17500) {
+                System.out.println("DRONE: Increasing height");
+                up(20);
+                start = System.currentTimeMillis();
+            }
+
+            this.getBattery();
+
+            Thread.sleep(5000);
+
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }
 }

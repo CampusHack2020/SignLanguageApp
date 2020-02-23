@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity"
-    android:background="#dee0df" >
+    android:background="@color/mainBG"
+    tools:context=".HomeActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -27,16 +26,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.167" />
 
-    <LinearLayout android:orientation="vertical"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@drawable/customborder1"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.5" />
 
     <LinearLayout
         android:layout_width="442dp"
@@ -48,7 +48,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"/>
+        app:layout_constraintVertical_bias="0.5" />
 
     <LinearLayout
         android:id="@+id/fabWrapper1"
@@ -69,13 +69,13 @@
             android:layout_height="124dp"
             android:layout_margin="10dp"
             android:clickable="true"
+            android:elevation="0dp"
             android:onClick="openDifficulty"
             android:src="@drawable/controller"
-            android:elevation="0dp"
-            app:elevation="0dp"
-            app:maxImageSize="70dp"
             app:backgroundTint="@android:color/white"
-            app:fabCustomSize="120dp" />
+            app:elevation="0dp"
+            app:fabCustomSize="120dp"
+            app:maxImageSize="70dp" />
 
     </LinearLayout>
 
@@ -91,21 +91,51 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7">
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButtonBook"
             android:layout_width="120dp"
             android:layout_height="124dp"
             android:layout_margin="10dp"
             android:clickable="true"
+            android:elevation="0dp"
             android:onClick="openDictionaryAlphabetChoice"
             android:src="@drawable/dictionary"
-            android:elevation="0dp"
+            app:backgroundTint="@android:color/white"
             app:elevation="0dp"
-            app:maxImageSize="100dp"
             app:fabCustomSize="120dp"
-            app:backgroundTint="@android:color/white" />
+            app:maxImageSize="100dp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/LEARN"
+        android:layout_width="120dp"
+        android:layout_height="46dp"
+        android:text="LEARN"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.796"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.800" />
+
+    <TextView
+        android:id="@+id/PLAY"
+        android:layout_width="120dp"
+        android:layout_height="46dp"
+        android:text="PLAY"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.224"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.800" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
