@@ -19,6 +19,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".HomeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".DictionaryAlphabetChoice"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".DifficultyActivity"
             android:screenOrientation="portrait"/>
 

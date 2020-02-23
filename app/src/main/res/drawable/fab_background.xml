@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:innerRadius="-12dp"
+    android:shape="ring"
+    android:thicknessRatio="2"
+    android:useLevel="false" >
+
+    <solid android:color="@android:color/transparent" />
+
+    <!-- here set the width and color of your border -->
+    <stroke
+        android:width="4dp"
+        android:color="#68c2e8" />
+</shape>
