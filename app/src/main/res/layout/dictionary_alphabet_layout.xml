@@ -116,6 +116,7 @@
             android:layout_height="124dp"
             android:layout_margin="10dp"
             android:clickable="true"
+            android:onClick="openAlphabetChart"
             android:src="@drawable/alphabet"
             android:elevation="0dp"
             app:elevation="0dp"
