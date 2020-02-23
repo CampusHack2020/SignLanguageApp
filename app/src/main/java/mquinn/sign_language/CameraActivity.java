@@ -75,7 +75,7 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
 
     private int wordPosIndex = 0;
 
-    private List<String> words = Arrays.asList("you", "ape", "hello", "hi", "home", "people");
+    private List<String> words = Arrays.asList("you", "you", "you", "you", "you", "you");
     private List<Character> letters = new ArrayList<>();
 
     private String currentLetter, previousLetter, modLetter, currentWord;
@@ -264,7 +264,7 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
 
                 if (soFar.equals(currentWord)) {
 
-                    // TODO - create dialogue
+//                    Toast.makeText(CameraActivity.this, "Great job!", Toast.LENGTH_SHORT).show();
 
                     newRandWord(currentWord);
                     word.setText("Sign: " + currentWord);

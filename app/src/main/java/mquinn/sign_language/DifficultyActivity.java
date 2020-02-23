@@ -33,6 +33,6 @@ public class DifficultyActivity extends Activity {
                 break;
         }
 
-        startActivity(new Intent(DifficultyActivity.this, MainActivity.class));
+        startActivity(new Intent(DifficultyActivity.this, HomeActivity.class));
     }
 }
