@@ -215,6 +215,9 @@ public class DroneController implements Runnable {
 
         this.connect("192.168.10.1", 8889);
         this.takeOff();
+
+        Thread.sleep(100);
+
         up(90);
 
         while (running) {

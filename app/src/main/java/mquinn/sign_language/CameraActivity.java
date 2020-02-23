@@ -69,7 +69,7 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
 
     private int wordPosIndex = 0;
 
-    private List<String> words = Arrays.asList("y", "o", "u", "b", "c", "you");
+    private List<String> words = Arrays.asList("you", "and", "of", "dad", "box", "ball");
     private List<Character> letters = new ArrayList<>();
 
     private String currentLetter, previousLetter, modLetter, currentWord;
@@ -156,11 +156,14 @@ public class CameraActivity extends AppCompatActivity implements CvCameraViewLis
 
     public void setCameraDroneChoice (View view){
         startActivity(new Intent(CameraActivity.this, CameraDroneChoiceActivity.class));
-        try {
-            dc.running = false;
-            dc.land();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (droneMode) {
+            try {
+                dc.running = false;
+                dc.land();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
