@@ -6,6 +6,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 
+import mquinn.sign_language.dictionary.ItemListActivity;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -18,8 +20,8 @@ public class MainActivity extends Activity {
     public void openDifficulty (View view){
         startActivity(new Intent(MainActivity.this, DifficultyActivity.class));
     }
-    
+
     public void openDictionary (View view){
-        startActivity(new Intent(MainActivity.this, DictionaryActivity.class));
+        startActivity(new Intent(MainActivity.this, ItemListActivity.class));
     }
 }

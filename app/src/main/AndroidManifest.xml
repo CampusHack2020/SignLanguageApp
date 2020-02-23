@@ -19,9 +19,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DictionaryActivity"
-            android:screenOrientation="portrait"/>
-
         <activity android:name=".DifficultyActivity"
             android:screenOrientation="portrait"/>
 
@@ -33,6 +30,13 @@
 
         <activity android:name=".DroneActivity"
             android:screenOrientation="landscape"/>
+
+        <activity android:name=".dictionary.ItemListActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".dictionary.ItemDetailActivity"
+            android:screenOrientation="portrait"/>
+
 
     </application>
 
