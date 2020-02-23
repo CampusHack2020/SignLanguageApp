@@ -3,11 +3,13 @@ package mquinn.sign_language.dictionary;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import mquinn.sign_language.MainActivity;
 import mquinn.sign_language.R;
 
 /**
@@ -69,5 +71,9 @@ public class ItemDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void openList (View view){
+        startActivity(new Intent(ItemDetailActivity.this, ItemListActivity.class));
     }
 }

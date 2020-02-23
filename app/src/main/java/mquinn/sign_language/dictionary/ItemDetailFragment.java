@@ -72,13 +72,12 @@ public class ItemDetailFragment extends Fragment {
 
 //            Leo's special moment -> mItem.word.split("(?!^)")
 
-            System.out.println(mItem.word);
-
             char[] chars = mItem.word.toCharArray();
 
             for(int i = 0; i < chars.length; i++) {
-                int resourceId = getResources().getIdentifier("a", "drawable", "mquinn.sign_language.dictionary");//getResources().getIdentifier(String.valueOf(Character.toLowerCase(chars[i])), "drawable", "mquinn.sign_language.dictionary");
-                System.out.println(resourceId + ", " + String.valueOf(Character.toLowerCase(chars[i])) + ", " + this.getClass().getPackage().toString());
+
+                int resourceId = getResources().getIdentifier(String.valueOf(Character.toLowerCase(chars[i])), "drawable", getContext().getPackageName());
+
                 ImageView image = new ImageView(rootView.getContext());
 
                 Bitmap bMap = BitmapFactory.decodeResource(getResources(), resourceId);
