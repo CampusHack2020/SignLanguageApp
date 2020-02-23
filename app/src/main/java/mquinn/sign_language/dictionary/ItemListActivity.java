@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import mquinn.sign_language.DictionaryAlphabetChoice;
+import mquinn.sign_language.HomeActivity;
 import mquinn.sign_language.MainActivity;
 import mquinn.sign_language.R;
 
@@ -34,7 +36,7 @@ public class ItemListActivity extends AppCompatActivity {
     private boolean mTwoPane;
 
     public void openMain (View view){
-        startActivity(new Intent(ItemListActivity.this, MainActivity.class));
+        startActivity(new Intent(ItemListActivity.this, DictionaryAlphabetChoice.class));
     }
 
     @Override

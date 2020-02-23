@@ -5,19 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CameraDroneChoiceActivity"
+    tools:context=".DictionaryAlphabetChoice"
     android:background="#dee0df">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="1.0" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="277dp"
+        android:layout_width="278dp"
         android:layout_height="278dp"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,12 +43,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"/>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="1.0" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButtonDifficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:onClick="openDifficulty"
+        android:onClick="openHomepage"
         android:layout_margin="10dp"
         app:backgroundTint="@android:color/white"
         android:src="?attr/actionModeCloseDrawable"
@@ -83,18 +83,19 @@
         app:layout_constraintVertical_bias="0.7">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButtonCamera"
+            android:id="@+id/floatingActionButtonDictionary"
             android:layout_width="120dp"
             android:layout_height="124dp"
             android:layout_margin="10dp"
             android:clickable="true"
-            android:onClick="openCamera"
-            android:src="@drawable/camera"
+            android:onClick="openDictionary"
+            android:src="@drawable/book"
             android:elevation="0dp"
-            app:maxImageSize="50dp"
             app:elevation="0dp"
+            app:maxImageSize="70dp"
             app:backgroundTint="@android:color/white"
             app:fabCustomSize="120dp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -110,34 +111,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.7">
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButtonDrone"
+            android:id="@+id/floatingActionButtonAlphabet"
             android:layout_width="120dp"
             android:layout_height="124dp"
             android:layout_margin="10dp"
             android:clickable="true"
-            android:onClick="openDrone"
-            android:src="@drawable/drone"
+            android:src="@drawable/alphabet"
             android:elevation="0dp"
-            app:maxImageSize="70dp"
-            app:fabCustomSize="120dp"
             app:elevation="0dp"
+            app:maxImageSize="200dp"
+            app:fabCustomSize="120dp"
             app:backgroundTint="@android:color/white" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="400dp"
-        android:layout_height="46dp"
-        android:text="CAMERA OPTION"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
