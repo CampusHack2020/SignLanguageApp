@@ -24,7 +24,7 @@ public class DictionaryAlphabetChoice extends Activity {
         startActivity(new Intent(DictionaryAlphabetChoice.this, HomeActivity.class));
     }
 
-    //public void openAlphabet (View view){
-    //    startActivity(new Intent(DictionaryAlphabetChoice.this, DictionaryAlphabetChoice.class));
-    //}
+    public void openAlphabetChart (View view){
+        startActivity(new Intent(DictionaryAlphabetChoice.this, AlphabetChartActivity.class));
+    }
 }

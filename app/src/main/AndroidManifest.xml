@@ -43,6 +43,9 @@
         <activity android:name=".dictionary.ItemDetailActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".AlphabetChartActivity"
+            android:screenOrientation="portrait"/>
+
 
     </application>
 
