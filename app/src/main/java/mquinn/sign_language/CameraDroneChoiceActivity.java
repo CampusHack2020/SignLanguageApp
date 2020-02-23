@@ -31,7 +31,4 @@ public class CameraDroneChoiceActivity extends Activity {
         startActivity(new Intent(CameraDroneChoiceActivity.this, DifficultyActivity.class));
     }
 
-    public void openDictionary (View view){
-        startActivity(new Intent(CameraDroneChoiceActivity.this, DictionaryActivity.class));
-    }
 }
